@@ -1,6 +1,6 @@
 {
-  "name": "trace_event",
-  "version": "1.0.0",
+  "name": "v8_trace_event",
+  "version": "1.0.1",
   "description": "trace event by V8 `trace` API",
   "main": "index.js",
   "scripts": {
