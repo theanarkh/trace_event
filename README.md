@@ -7,7 +7,7 @@ npm i trace_event --save
 ```
 
 # use
-compute cost time of function by trace event system, and [more](https://github.com/theanarkh/trace_event/test)
+compute cost time of function by trace event system, and [more](https://github.com/theanarkh/trace_event/tree/main/test)
 ```
 const { phase, trace } = require('..');
 const { Session } = require('inspector');
