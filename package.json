@@ -1,8 +1,16 @@
 {
   "name": "v8_trace_event",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "trace event by V8 `trace` API",
   "main": "index.js",
+  "files": [
+    "README.md",
+    "package.json",
+    "trace.cc",
+    "index.js",
+    "binding.gyp",
+    "test/**"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "node-gyp rebuild"
