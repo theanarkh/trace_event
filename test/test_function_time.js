@@ -1,14 +1,3 @@
-# trace_event
-trace event by V8 `trace` API, see https://github.com/nodejs/node/pull/42462 and https://nodejs.org/dist/latest-v18.x/docs/api/tracing.html .
-
-# install
-```
-npm i trace_event --save
-```
-
-# use
-compute cost time of function by trace event system, and [more](https://github.com/theanarkh/trace_event/test)
-```
 const { phase, trace } = require('..');
 const { Session } = require('inspector');
 const session = new Session();
@@ -48,4 +37,3 @@ async function test() {
 }
 
 test();
-```

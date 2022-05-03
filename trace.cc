@@ -1,0 +1,76 @@
+#include <node.h>
+
+// trace_event_common.h
+#define TRACE_EVENT_PHASE_BEGIN ('B')
+#define TRACE_EVENT_PHASE_END ('E')
+#define TRACE_EVENT_PHASE_COMPLETE ('X')
+#define TRACE_EVENT_PHASE_INSTANT ('I')
+#define TRACE_EVENT_PHASE_ASYNC_BEGIN ('S')
+#define TRACE_EVENT_PHASE_ASYNC_STEP_INTO ('T')
+#define TRACE_EVENT_PHASE_ASYNC_STEP_PAST ('p')
+#define TRACE_EVENT_PHASE_ASYNC_END ('F')
+#define TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN ('b')
+#define TRACE_EVENT_PHASE_NESTABLE_ASYNC_END ('e')
+#define TRACE_EVENT_PHASE_NESTABLE_ASYNC_INSTANT ('n')
+#define TRACE_EVENT_PHASE_FLOW_BEGIN ('s')
+#define TRACE_EVENT_PHASE_FLOW_STEP ('t')
+#define TRACE_EVENT_PHASE_FLOW_END ('f')
+#define TRACE_EVENT_PHASE_METADATA ('M')
+#define TRACE_EVENT_PHASE_COUNTER ('C')
+#define TRACE_EVENT_PHASE_SAMPLE ('P')
+#define TRACE_EVENT_PHASE_CREATE_OBJECT ('N')
+#define TRACE_EVENT_PHASE_SNAPSHOT_OBJECT ('O')
+#define TRACE_EVENT_PHASE_DELETE_OBJECT ('D')
+#define TRACE_EVENT_PHASE_MEMORY_DUMP ('v')
+#define TRACE_EVENT_PHASE_MARK ('R')
+#define TRACE_EVENT_PHASE_CLOCK_SYNC ('c')
+#define TRACE_EVENT_PHASE_ENTER_CONTEXT ('(')
+#define TRACE_EVENT_PHASE_LEAVE_CONTEXT (')')
+#define TRACE_EVENT_PHASE_LINK_IDS ('=')
+
+void DefineTraceConstants(v8::Local<v8::Object> target) {
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_BEGIN);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_END);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_COMPLETE);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_INSTANT);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_ASYNC_BEGIN);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_ASYNC_STEP_INTO);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_ASYNC_STEP_PAST);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_ASYNC_END);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_NESTABLE_ASYNC_INSTANT);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_FLOW_BEGIN);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_FLOW_STEP);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_FLOW_END);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_METADATA);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_COUNTER);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_SAMPLE);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_CREATE_OBJECT);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_SNAPSHOT_OBJECT);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_DELETE_OBJECT);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_MEMORY_DUMP);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_MARK);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_CLOCK_SYNC);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_ENTER_CONTEXT);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_LEAVE_CONTEXT);
+  NODE_DEFINE_CONSTANT(target, TRACE_EVENT_PHASE_LINK_IDS);
+}
+
+void Initialize(
+  v8::Local<v8::Object> exports,
+  v8::Local<v8::Value> module,
+  v8::Local<v8::Context> context
+) {
+  v8::Isolate* isolate = context->GetIsolate();
+  v8::Local<v8::Object> binding = context->GetExtrasBindingObject();
+  v8::Local<v8::String> trace_name = v8::String::NewFromUtf8(isolate, "trace", v8::NewStringType::kNormal, strlen("trace")).ToLocalChecked();
+  v8::Local<v8::Value> trace = binding->Get(context, trace_name).ToLocalChecked();
+  v8::Local<v8::String> phase_name = v8::String::NewFromUtf8(isolate, "phase", v8::NewStringType::kNormal, strlen("phase")).ToLocalChecked();
+  v8::Local<v8::Object> phase = v8::Object::New(isolate);
+  DefineTraceConstants(phase);
+  exports->Set(context, phase_name, phase).Check();
+  exports->Set(context, trace_name, trace).Check();
+}
+
+NODE_MODULE_CONTEXT_AWARE(NODE_GYP_MODULE_NAME, Initialize)

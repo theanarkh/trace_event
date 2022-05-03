@@ -1,0 +1,19 @@
+{
+  "name": "trace_event",
+  "version": "1.0.0",
+  "description": "trace event by V8 `trace` API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theanarkh/trace_event.git"
+  },
+  "keywords": [
+    "trace event"
+  ],
+  "author": "theanarkh",
+  "gypfile": true
+}

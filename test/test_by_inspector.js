@@ -1,14 +1,3 @@
-# trace_event
-trace event by V8 `trace` API, see https://github.com/nodejs/node/pull/42462 and https://nodejs.org/dist/latest-v18.x/docs/api/tracing.html .
-
-# install
-```
-npm i trace_event --save
-```
-
-# use
-compute cost time of function by trace event system, and [more](https://github.com/theanarkh/trace_event/test)
-```
 const { phase, trace } = require('..');
 const { Session } = require('inspector');
 const session = new Session();
@@ -25,11 +14,6 @@ function post(message, data) {
     });
 }
 
-function sleep(time) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
-}
 async function test() {
     const events = [];
     session.on('NodeTracing.dataCollected', (n) => {
@@ -38,14 +22,11 @@ async function test() {
     session.on('NodeTracing.tracingComplete', () => {});
     await post('NodeTracing.start', { traceConfig: { includedCategories: ['test'] } });
 
-    trace(phase.TRACE_EVENT_PHASE_BEGIN, 'test', 'sleep', 0);
-    await sleep(3000);
-    trace(phase.TRACE_EVENT_PHASE_END, 'test', 'sleep', 0);
+    trace(phase.TRACE_EVENT_PHASE_BEGIN, 'test', 'a', 0, {name: 'hello'});
+    trace(phase.TRACE_EVENT_PHASE_END, 'test', 'a', 0, {name: 'world'});
 
     await post('NodeTracing.stop');
-    const data = events.filter((t) => null !== /test/.exec(t.cat));
-    console.log((data[1].ts - data[0].ts) / 1000)
+    console.log(events.filter((t) => null !== /test/.exec(t.cat)))
 }
 
 test();
-```
