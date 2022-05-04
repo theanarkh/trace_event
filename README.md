@@ -1,9 +1,9 @@
-# trace_event
+# v8_trace_event
 trace event by V8 `trace` API, see https://github.com/nodejs/node/pull/42462 and https://nodejs.org/dist/latest-v18.x/docs/api/tracing.html .
 
 # install
 ```
-npm i trace_event --save
+npm i v8_trace_event --save
 ```
 
 # use
